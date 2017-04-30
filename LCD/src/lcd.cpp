@@ -1,0 +1,3 @@
+/*
+ Practice area to work with LCD
+*/
