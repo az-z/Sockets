@@ -1,35 +1,31 @@
-/*
- Demonstration sketch for Adafruit i2c/SPI LCD backpack
- using MCP23008 I2C expander and the Trinket mini microcontroller
+// NOTE: Use lib 136
 
- This sketch prints "Hello World!" to the LCD
- and shows a count in seconds.  The circuit:
-
- * 5V to Trinket 5V pin
- * GND to Trinket GND pin
- * CLK to Trinket pin GPIO #2
- * DAT to Trinket pin GPIO #0
-*/
-
-// include the library code:
-// #include "Adafruit_LiquidCrystal.h"
-#include "Adafruit_LiquidCrystal.h"
 #include <Arduino.h>
+#include <LiquidCrystal_I2C.h>
+#include <Wire.h>
 
-// Connect via i2c, default address #0 (A0-A2 not jumpered)
-Adafruit_LiquidCrystal lcd(0);
+// To get this thing to work - either use this init with the setBacklightPin
+// or combine init with setBacklightPin as:
+// LiquidCrystal_I2C lcd(0x3F,2,1,0,4,5,6,7,3,POSITIVE);
+
+LiquidCrystal_I2C lcd(0x3F, 2, 1, 0, 4, 5, 6, 7);
+
+// #define BACKLIGHT_PIN     13
 
 void setup() {
-  // set up the LCD
-  lcd.begin(16, 2);           // our display has 16 cols, 2 rows
-  lcd.setBacklight(HIGH);     // Turn on the backlight
-  lcd.print("hello, world!"); // Print a message to the LCD.
+  lcd.setBacklightPin(3, POSITIVE);
+  // lcd.setBacklight(HIGH); // NOTE: You can turn the backlight off by setting
+  // it to LOW instead of HIGH
+  // lcd.backlight();
+  lcd.begin(16, 2);
+  lcd.clear();
 }
 
 void loop() {
-  // set the cursor to column 0, line 1
-  // (note: line 1 is the second row, since counting begins with 0):
+  lcd.setCursor(0, 0);
+  lcd.print("http://mklec.com");
   lcd.setCursor(0, 1);
-  // print the number of seconds since reset:
-  lcd.print(millis() / 1000);
+  lcd.print("I2C Module Demo");
+  delay(1000);
+  lcd.autoscroll();
 }
