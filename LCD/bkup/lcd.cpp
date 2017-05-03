@@ -1,3 +1,6 @@
+// DOC:
+// http://blog.simtronyx.de/en/a-1-8-inch-tft-color-display-hy-1-8-spi-and-an-arduino/
+
 // Grafiktest 1.8 Zoll TFT-Farb-Display (HY-1.8 SPI)
 
 #define TFT_PIN_CS 10 // Arduino-Pin an Display CS
